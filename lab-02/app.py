@@ -12,8 +12,6 @@ from cipher.playfair.playfair import PlayFairCipher
 # 4. Railfence
 from cipher.railfence.railfence import RailFenceCipher
 
-# 5. Transposition
-from cipher.Transposition.Transposition import TranspositionCipher
 
 app = Flask(__name__)
 
@@ -115,28 +113,6 @@ def railfence_decrypt():
     key = int(request.form['inputKeyCipher'])
     railfence = RailFenceCipher()
     decrypted_text = railfence.rail_fence_decrypt(text, key)
-    return f"text: {text}<br>/key: {key}<br>/decrypted text: {decrypted_text}"
-
-
-# --------------------- ROUTES TRANSPOSITION ---------------------
-@app.route("/transposition")
-def transposition():
-    return render_template('transposition.html')
-
-@app.route("/transposition/encrypt", methods=['POST'])
-def transposition_encrypt():
-    text = request.form['inputPlainText']
-    key = int(request.form['inputKeyPlain'])  
-    transposition = TranspositionCipher()
-    encrypted_text = transposition.encrypt(text, key)
-    return f"text: {text}<br>/key: {key}<br>/encrypted text: {encrypted_text}"
-
-@app.route("/transposition/decrypt", methods=['POST'])
-def transposition_decrypt():
-    text = request.form['inputCipherText']
-    key = int(request.form['inputKeyCipher'])  
-    transposition = TranspositionCipher()
-    decrypted_text = transposition.decrypt(text, key)
     return f"text: {text}<br>/key: {key}<br>/decrypted text: {decrypted_text}"
 
 
